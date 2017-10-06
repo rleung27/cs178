@@ -1,0 +1,43 @@
+# Name makefile
+# Course: CS178 Build Automation for DevOps and QA
+# CRN: 76718
+# Date: 9/18/2017
+# Assignment: Write a makefile that contains the following two targets:
+#     ServerCountThrees - a native executable file that counts the number of 32 bit 
+#         ints with the value 3s in the binary file threesData.bin
+#     runServerCountThrees - a target that launches the executable
+# usage: make
+# Reference: https://www.cs.fsu.edu/~myers/howto/makefiles.txt
+
+run: runServerCountThrees clean
+
+ROOT = "../"
+src_build_dir := $(shell mkdir -p $(ROOT/src/build))
+
+# ServerCountThrees is the target
+# which depends on ServerCountThrees.o readInt32BitLE.h readInt32BitLE.c existing
+ServerCountThrees: ServerCountThrees.o readInt32BitLE.o
+        # Linking command for linking two object cod files together
+        # into a target executable called ServerCountThrees 
+	cc -o $@/ServerCountThrees ServerCountThrees.o readInt32BitLE.o
+
+# Create the readInt32BitLE.o target by compiling readInt32BitLE.c
+readInt32BitLE.o: readInt32BitLE.c readInt32BitLE.h
+	cc -c readInt32BitLE.c
+
+# How to build the target ServerCountThrees.o
+# depends on ServerCountThrees.c and readInt32BitLE.o existing
+# if any 2 file changes, then ServerCountThrees.o must be rebuilt
+ServerCountThrees.o: ServerCountThrees.c readInt32BitLE.o
+	cc -c ServerCountThrees.c
+
+# Create the runServerCountThrees target
+# runServerCountThrees will launch the ServerCountThrees executable
+runServerCountThrees: ServerCountThrees
+	./ServerCountThrees	
+
+.PHONY: run
+
+# clean up
+clean:
+	rm *.o ServerCountThrees
