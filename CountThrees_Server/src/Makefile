@@ -14,7 +14,8 @@
 
 # Create Test target that executes the below targets
 #test: CreateDirs CopyDataFile CopyExecutableFile runServerCountThrees clean
-test: CreateDirs CopyDataFile runServerCountThrees clean
+#test: CreateDirs CopyDataFile runServerCountThrees clean
+test: CreateDirs CopyDataFile runServerCountThrees
 
 # Assign variables
 CC=cc
