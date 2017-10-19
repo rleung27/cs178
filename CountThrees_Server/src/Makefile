@@ -61,8 +61,8 @@ CopyExeFile:
 # runServerCountThrees will launch the ServerCountThrees executable
 runServerCountThrees: ServerCountThrees
 	cp $(SourceDir)/ServerCountThrees $(BuildDir)
-	#./$(BuildDir)/ServerCountThrees	
-	nohup ./$(BuildDir)/ServerCountThrees > /tmp/ServerCountThrees.log &
+	./$(BuildDir)/ServerCountThrees	
+	#nohup ./$(BuildDir)/ServerCountThrees > /tmp/ServerCountThrees.log &
 
 .PHONY: test
 
